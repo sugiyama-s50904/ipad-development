@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>リファレンス — 神託の勇者</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="reference-page">
+<header><div><h1>リファレンス</h1><p class="muted">神託の勇者 · このタブを見ながら、戦闘画面でコードを編集できます。</p></div></header>
+<section class="panel reference-content"><h2>戦闘の基本</h2><ul><li>攻撃は1ダメージ。敵HPが0になると、敵の行動前に勝利します。</li><li>攻撃・特技には防御、魔法には回避。対応できなければ即死亡します。</li><li>タメ・詠唱・待機は攻撃の機会。行動パターンは最後から先頭に戻ります。</li><li>覚えるは1ターン消費し、そのターンの敵行動を終了後に記憶します。危険なターンに使うと被弾します。</li><li>RUNはコード終了・勝利・死亡まで実行します。RUN中は編集・手動操作できません。</li><li>死亡後も編集できます。RETRYは戦闘を初期化し、コードを保持します。</li></ul></section>
+      <section class="panel reference-content"><h2>日本語コードの文法</h2><p>1行に1命令。ブロックは「ここまで」で閉じます。空行と # または // で始まるコメントは無視します。</p><pre>攻撃する
+防御する
+回避する
+覚える
+
+5回繰り返す
+    攻撃する
+ここまで
+
+iを1から10まで繰り返す
+    もし、i % 2 = 0ならば
+        防御する
+    違えばもし、記憶 = 「詠唱」ならば
+        回避する
+    違えば
+        攻撃する
+    ここまで
+ここまで</pre><p>値：ターン、敵HP、記憶、ループカウンタ。演算：+ - * / %、= == != &lt; &gt; &lt;= &gt;=、AND OR NOT、括弧。文字列は「」または引用符。優先順位は算術→比較→NOT→AND→OR。カウンタは昇順で両端を含みます。0回は何もしません。</p><p>最大1000行・入れ子64段・実行命令数50,000。上限や計算エラーでRUNが終了すると、その時点の戦闘状態で手動へ戻ります。</p></section>
+<section class="panel reference-content"><h2>保存と入力</h2><p>テキスト入力とコマンド入力は同じコードを編集します。コマンド入力では、閉じる行を含む構文を挿入できます。</p><p>「プログラムの保存」を開くと、セーブ・ロード・名前変更・複製・削除・テキスト入出力ができます。保存先は、このブラウザ内です。</p><p>詳細ログは死亡・勝利後に開けます。行番号を選ぶとエディタの対応行へ移動します。</p></section>
+</main></body></html>

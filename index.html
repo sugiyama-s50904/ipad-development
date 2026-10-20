@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101722"><title>神託の勇者</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<main>
+  <header><div><span class="eyebrow">THE ORACLE'S HERO</span><h1>神託の勇者</h1></div><a class="reference-link" href="reference.html" target="_blank" rel="noopener noreferrer">リファレンス ↗<span class="sr-only">（別タブで開く）</span></a></header>
+  <details class="settings-panel panel"><summary>戦闘設定</summary><div class="settings" aria-label="戦闘設定">
+    <label>モード<select id="mode"><option value="test">開発用テスト（全構文）</option><option value="chapter">章モード（テスト敵）</option></select></label>
+    <label>章<select id="chapter"></select></label><label>対戦相手<select id="enemy"></select></label><span id="retries">累積RETRY：0</span>
+  </div></details>
+  <div class="workspace">
+  <section class="battle panel" aria-label="戦闘画面">
+    <div class="enemy-heading"><h2 id="enemy-name"></h2></div>
+    <div class="stage"><svg id="sprite" viewBox="0 0 180 160" role="img" aria-label="敵のスプライト"></svg><div class="ground"></div></div>
+    <div class="hp-label"><span>敵HP</span><strong id="hp-text"></strong></div><progress id="hp" aria-label="敵HP"></progress>
+    <div class="status-row"><p id="latest" aria-live="polite">行動パターンを読み、神託を与えてください。</p><div class="turn-card"><span>TURN</span><strong id="turn">1</strong></div></div>
+    <div class="pattern"><h3>行動パターン</h3><ol id="pattern"></ol><small>繰り返し</small></div>
+    <div id="outcome" hidden><strong id="outcome-text"></strong><button id="retry">RETRY</button><button id="show-logs">詳細ログ</button></div>
+    <section class="commands" aria-label="手動コマンド">
+      <div class="command-grid"><button data-action="攻撃">攻撃<span>1ダメージ</span></button><button data-action="防御">防御<span>攻撃・特技に対応</span></button><button data-action="回避">回避<span>魔法に対応</span></button></div>
+      <div class="memory-row"><button data-action="覚える">覚える</button><div><small>記憶</small><strong id="memory">なし</strong></div></div>
+
+
+    </section>
+  </section>
+    <section class="panel code-panel"><div class="section-heading"><h2>プログラム</h2><span id="line-status">実行行：—</span></div>
+      <div class="input-mode"><button id="text-mode" aria-pressed="true">テキスト入力</button><button id="command-mode" aria-pressed="false">コマンド入力</button></div>
+      <div id="builder" hidden><label>挿入する構文<select id="snippet"><option value="attack">攻撃する</option><option value="defend">防御する</option><option value="dodge">回避する</option><option value="memory">覚える</option><option value="repeat">回数繰り返し</option><option value="counter">カウンタ繰り返し</option><option value="if">もし / 違えばもし / 違えば</option></select></label><div class="builder-fields"><label>回数・終了値<input id="count" type="number" value="5" min="0" max="50000"></label><label>比較する値<select id="condition-value"><option>ターン</option><option>敵HP</option><option>記憶</option></select></label><label>比較対象<input id="condition-target" value="1" maxlength="100"></label></div><button id="insert">カーソルの行に挿入</button><small>分岐と繰り返しは、閉じる行も含めて挿入します。</small></div>
+      <div class="editor-wrap"><div id="line-numbers" aria-hidden="true"></div><textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="日本語プログラム" wrap="off"></textarea></div>
+      <div class="run-row"><button id="run" class="primary">RUN ▶</button><label>実行速度<select id="speed"><option value="slow">低速</option><option value="fast">高速</option></select></label></div>
+      <p id="message" role="status">コードを書いてRUN。終了後は手動操作へ戻ります。</p>
+      <details class="library"><summary>プログラムの保存</summary><div class="save-row"><input id="program-name" placeholder="プログラム名" aria-label="プログラム名" maxlength="80"><button id="save">セーブ</button><button id="save-new">新規保存</button></div><select id="programs" aria-label="保存済みプログラム"></select><div class="library-actions"><button id="load">ロード</button><button id="rename">名前変更</button><button id="duplicate">複製</button><button id="delete">削除</button><button id="export">テキスト出力</button><button id="import">テキスト取込</button></div><input id="import-file" type="file" accept=".txt,text/plain" hidden></details>
+    </section>
+  </div>
+  <section id="logs-panel" class="panel" hidden><div class="section-heading"><h2>直近の戦闘ログ</h2><button id="close-logs">閉じる</button></div><p class="muted">RUNの行番号を選ぶと、そのコード行を確認できます。</p><div id="logs"></div></section>
+  
+</main><script type="module" src="js/app.js"></script>
+</body></html>
